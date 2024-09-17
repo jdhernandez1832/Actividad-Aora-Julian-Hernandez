@@ -9,35 +9,37 @@ import { images } from '../../constants'; // Asegúrate de que esta ruta sea cor
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton'
 import {createUser} from '../../lib/appwrite'
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 
 const SignUp = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+  const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: '',
     email: '',
     password: ''
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = async () => {
-    if(!form.username || !form.email || !form.password){
-      Alert.alert('Error', 'Please fill in all the fields')
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
     }
 
-    setIsSubmitting(true);
+    setSubmitting(true);
     try {
-      const result = await createUser(form.email, form.password,form.username)
+      const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLogged(true);
 
-      // set it to global state...
-
-      router.replace('/home')
+      router.replace("/home");
     } catch (error) {
-      Alert.alert('Error', error.message)
-    }finally{
-      setIsSubmitting(false)
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
     }
-  }
+  };
 
   return (
     <SafeAreaView style={tw`bg-[#171324] h-full`}>

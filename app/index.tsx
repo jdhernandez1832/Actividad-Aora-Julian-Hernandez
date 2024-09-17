@@ -8,12 +8,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import  CustomButton  from '../components/CustomButton';
 
 import {images} from '../constants';
-import { useGlobalContext } from '@/context/GlobalProvider';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 export default function App() {
-  const {isLoading, isLoggedInd} = useGlobalContext();
+  const {isLoading, isLogged} = useGlobalContext();
 
-  if(!isLoading && isLoggedInd) return <Redirect href="/home"/>
+  if(!isLoading && isLogged) return <Redirect href="/home"/>
 
   return (
     <SafeAreaView style={tw`bg-[#171324] h-full`}>
@@ -58,5 +58,5 @@ export default function App() {
         style='light'/>
     </SafeAreaView>
   );
-}
+};
 
