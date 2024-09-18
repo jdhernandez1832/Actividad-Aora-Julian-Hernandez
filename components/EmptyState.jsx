@@ -1,31 +1,30 @@
-import { View, Text, Image } from 'react-native'
-import {router} from 'expo-router';
-import tw from 'twrnc';
+import { router } from "expo-router";
+import { View, Text, Image } from "react-native";
 
-import { images } from '../constants';
+import { images } from "../constants";
 import CustomButton from "./CustomButton";
 
-const EmptyState = ({title, subtitle}) => {
+const EmptyState = ({ title, subtitle }) => {
   return (
-    <View style={tw`justify-center items-center px-4`}>
-      <Image source={images.empty} 
-      style={tw`2-[270px] h-[215px]`}
-      resizeMode='contain'
+    <View className="flex justify-center items-center px-4">
+      <Image
+        source={images.empty}
+        resizeMode="contain"
+        className="w-[270px] h-[216px]"
       />
-        <Text style={tw`font-pmedimium text-sm text-gray-100`}>
-            {title}
-        </Text>
-        <Text style={tw`text-xl font-psemibold text-white mt-2`}> 
-            {subtitle}
-        </Text>
 
-        <CustomButton
-            title="Create video"
-            handlePress={()=> router.push('/create')}
-            containerStyles="w-full my-5"
-        />
+      <Text className="text-sm font-pmedium text-gray-100">{title}</Text>
+      <Text className="text-xl text-center font-psemibold text-white mt-2">
+        {subtitle}
+      </Text>
+
+      <CustomButton
+        title="Back to Explore"
+        handlePress={() => router.push("/home")}
+        containerStyles="w-full my-5"
+      />
     </View>
-  )
-}
+  );
+};
 
-export default EmptyState
+export default EmptyState;
